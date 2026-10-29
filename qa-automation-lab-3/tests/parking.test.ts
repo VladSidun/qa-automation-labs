@@ -34,4 +34,15 @@ describe('calcParkingFee', () => {
   ])('враховує розпочаті години для %i хвилин', (minutes, expected) => {
     expect(calcParkingFee(minutes)).toBeCloseTo(expected, 2);
   });
+
+  it.each([
+    [539, 190],
+    [540, 190],
+    [541, 200],
+    [599, 200],
+    [600, 200],
+    [1440, 200],
+  ])('обмежує плату для %i хвилин', (minutes, expected) => {
+    expect(calcParkingFee(minutes)).toBeCloseTo(expected, 2);
+  });
 });
