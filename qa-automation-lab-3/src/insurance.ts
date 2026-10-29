@@ -32,5 +32,6 @@ export function calcInsurancePremium(
   accidentFreeYears = 0,
 ): number {
   assertValidInputs(carAge, drivingExperience, accidentFreeYears);
-  return calcBasePremium(carAge);
+  const premium = calcBasePremium(carAge);
+  return drivingExperience < 3 ? premium * 1.25 : premium;
 }
