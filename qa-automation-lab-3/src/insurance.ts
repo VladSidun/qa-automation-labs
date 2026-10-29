@@ -5,6 +5,8 @@ const MIDDLE_CAR_PREMIUM = 1500;
 const OLD_CAR_PREMIUM = 2000;
 const MIN_EXPERIENCE = 3;
 const NOVICE_SURCHARGE = 0.25;
+const DISCOUNT_PER_YEAR = 0.05;
+const MAX_ACCIDENT_FREE_DISCOUNT = 0.3;
 
 function assertNonNegativeInteger(value: number, code: string): void {
   if (!Number.isInteger(value) || value < 0) throw new Error(code);
@@ -37,16 +39,28 @@ function applyExperienceSurcharge(
   return premium;
 }
 
+function applyAccidentFreeDiscount(
+  premium: number,
+  accidentFreeYears: number,
+): number {
+  const discount = Math.min(
+    accidentFreeYears * DISCOUNT_PER_YEAR,
+    MAX_ACCIDENT_FREE_DISCOUNT,
+  );
+  return premium * (1 - discount);
+}
+
 export function calcInsurancePremium(
   carAge: number,
   drivingExperience: number,
   accidentFreeYears = 0,
 ): number {
   assertValidInputs(carAge, drivingExperience, accidentFreeYears);
-  const premium = applyExperienceSurcharge(
-    calcBasePremium(carAge),
+  const basePremium = calcBasePremium(carAge);
+  const withSurcharge = applyExperienceSurcharge(
+    basePremium,
     drivingExperience,
   );
-  const discount = Math.min(accidentFreeYears * 0.05, 0.3);
-  return premium * (1 - discount);
+  const result = applyAccidentFreeDiscount(withSurcharge, accidentFreeYears);
+  return Math.round(result * 100) / 100;
 }
