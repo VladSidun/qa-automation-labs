@@ -45,4 +45,15 @@ describe('calcParkingFee', () => {
   ])('обмежує плату для %i хвилин', (minutes, expected) => {
     expect(calcParkingFee(minutes)).toBeCloseTo(expected, 2);
   });
+
+  it.each([
+    [0, 0],
+    [15, 0],
+    [16, 15],
+    [60, 15],
+    [121, 35],
+    [541, 100],
+  ])('застосовує нічний тариф для %i хвилин', (minutes, expected) => {
+    expect(calcParkingFee(minutes, { night: true })).toBeCloseTo(expected, 2);
+  });
 });
