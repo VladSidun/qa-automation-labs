@@ -20,5 +20,6 @@ export function calcInsurancePremium(
   accidentFreeYears = 0,
 ): number {
   assertValidInputs(carAge, drivingExperience, accidentFreeYears);
+  if (carAge > 5) return 1500;
   return 1000;
 }
