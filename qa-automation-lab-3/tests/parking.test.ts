@@ -8,4 +8,8 @@ describe('calcParkingFee', () => {
       expect(() => calcParkingFee(minutes)).toThrow('INVALID_DURATION');
     },
   );
+
+  it.each([0, 1, 14, 15])('не стягує плату за %i хвилин', (minutes) => {
+    expect(calcParkingFee(minutes)).toBe(0);
+  });
 });
