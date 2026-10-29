@@ -78,4 +78,35 @@ describe('calcInsurancePremium', () => {
       expect(calcInsurancePremium(age, experience)).toBeCloseTo(expected, 2);
     },
   );
+
+  it.each([
+    { accidentFreeYears: 0, expected: 1000 },
+    { accidentFreeYears: 1, expected: 950 },
+    { accidentFreeYears: 5, expected: 750 },
+    { accidentFreeYears: 6, expected: 700 },
+    { accidentFreeYears: 7, expected: 700 },
+  ])(
+    'знижує тариф за $accidentFreeYears безаварійних років',
+    ({ accidentFreeYears, expected }) => {
+      expect(calcInsurancePremium(1, 10, accidentFreeYears)).toBeCloseTo(
+        expected,
+        2,
+      );
+    },
+  );
+
+  it.each([
+    { age: 1, experience: 2, accidentFreeYears: 1, expected: 1187.5 },
+    { age: 6, experience: 2, accidentFreeYears: 1, expected: 1781.25 },
+    { age: 11, experience: 2, accidentFreeYears: 1, expected: 2375 },
+    { age: 11, experience: 10, accidentFreeYears: 6, expected: 1400 },
+    { age: 11, experience: 10, accidentFreeYears: 7, expected: 1400 },
+  ])(
+    'поєднує надбавку й знижку для $age / $experience / $accidentFreeYears',
+    ({ age, experience, accidentFreeYears, expected }) => {
+      expect(
+        calcInsurancePremium(age, experience, accidentFreeYears),
+      ).toBeCloseTo(expected, 2);
+    },
+  );
 });
