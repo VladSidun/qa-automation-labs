@@ -12,4 +12,14 @@ describe('calcParkingFee', () => {
   it.each([0, 1, 14, 15])('не стягує плату за %i хвилин', (minutes) => {
     expect(calcParkingFee(minutes)).toBe(0);
   });
+
+  it.each([
+    [15, 0],
+    [16, 30],
+    [17, 30],
+    [59, 30],
+    [60, 30],
+  ])('за %i хвилин нараховує %i грн', (minutes, expected) => {
+    expect(calcParkingFee(minutes)).toBeCloseTo(expected, 2);
+  });
 });
