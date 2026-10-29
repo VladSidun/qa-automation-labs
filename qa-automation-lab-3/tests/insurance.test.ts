@@ -64,4 +64,18 @@ describe('calcInsurancePremium', () => {
   ])('застосовує тариф старшої вікової групи для %i років', (age, expected) => {
     expect(calcInsurancePremium(age, 3)).toBeCloseTo(expected, 2);
   });
+
+  it.each([
+    { age: 1, experience: 0, expected: 1250 },
+    { age: 1, experience: 2, expected: 1250 },
+    { age: 1, experience: 3, expected: 1000 },
+    { age: 1, experience: 4, expected: 1000 },
+    { age: 6, experience: 2, expected: 1875 },
+    { age: 11, experience: 2, expected: 2500 },
+  ])(
+    'враховує стаж $experience років для віку авто $age',
+    ({ age, experience, expected }) => {
+      expect(calcInsurancePremium(age, experience)).toBeCloseTo(expected, 2);
+    },
+  );
 });
