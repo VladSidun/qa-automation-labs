@@ -45,4 +45,14 @@ describe('calcInsurancePremium', () => {
       expect(calcInsurancePremium(age, 3)).toBeCloseTo(1000, 2);
     },
   );
+
+  it.each([
+    [5, 1000],
+    [6, 1500],
+    [7, 1500],
+    [9, 1500],
+    [10, 1500],
+  ])('визначає тариф для авто віком %i років', (age, expected) => {
+    expect(calcInsurancePremium(age, 3)).toBeCloseTo(expected, 2);
+  });
 });
