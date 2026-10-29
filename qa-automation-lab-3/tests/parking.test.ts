@@ -56,4 +56,18 @@ describe('calcParkingFee', () => {
   ])('застосовує нічний тариф для %i хвилин', (minutes, expected) => {
     expect(calcParkingFee(minutes, { night: true })).toBeCloseTo(expected, 2);
   });
+
+  it.each([
+    { minutes: 16, options: { weekend: true }, expected: 24 },
+    { minutes: 600, options: { weekend: true }, expected: 160 },
+    { minutes: 600, options: { night: true, weekend: true }, expected: 80 },
+    { minutes: 45, options: { night: true, weekend: true }, expected: 12 },
+    { minutes: 121, options: { night: true, weekend: true }, expected: 28 },
+    { minutes: 60, options: { night: false, weekend: false }, expected: 30 },
+  ])(
+    'враховує прапорці $options для $minutes хвилин',
+    ({ minutes, options, expected }) => {
+      expect(calcParkingFee(minutes, options)).toBeCloseTo(expected, 2);
+    },
+  );
 });
