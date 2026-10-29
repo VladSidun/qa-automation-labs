@@ -14,12 +14,16 @@ function assertValidInputs(
     throw new Error('INVALID_ACCIDENT_FREE_YEARS');
 }
 
+function calcBasePremium(carAge: number): number {
+  if (carAge > 5) return 1500;
+  return 1000;
+}
+
 export function calcInsurancePremium(
   carAge: number,
   drivingExperience: number,
   accidentFreeYears = 0,
 ): number {
   assertValidInputs(carAge, drivingExperience, accidentFreeYears);
-  if (carAge > 5) return 1500;
-  return 1000;
+  return calcBasePremium(carAge);
 }
