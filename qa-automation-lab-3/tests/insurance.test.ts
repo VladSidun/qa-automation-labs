@@ -38,4 +38,11 @@ describe('calcInsurancePremium', () => {
       ).not.toThrow();
     },
   );
+
+  it.each([0, 1, 4, 5])(
+    'задає базовий тариф 1000 грн для авто віком %i років',
+    (age) => {
+      expect(calcInsurancePremium(age, 3)).toBeCloseTo(1000, 2);
+    },
+  );
 });
