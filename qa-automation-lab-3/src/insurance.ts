@@ -3,6 +3,8 @@ const MIDDLE_CAR_MAX_AGE = 10;
 const YOUNG_CAR_PREMIUM = 1000;
 const MIDDLE_CAR_PREMIUM = 1500;
 const OLD_CAR_PREMIUM = 2000;
+const MIN_EXPERIENCE = 3;
+const NOVICE_SURCHARGE = 0.25;
 
 function assertNonNegativeInteger(value: number, code: string): void {
   if (!Number.isInteger(value) || value < 0) throw new Error(code);
@@ -26,12 +28,20 @@ function calcBasePremium(carAge: number): number {
   return OLD_CAR_PREMIUM;
 }
 
+function applyExperienceSurcharge(
+  premium: number,
+  drivingExperience: number,
+): number {
+  if (drivingExperience < MIN_EXPERIENCE)
+    return premium * (1 + NOVICE_SURCHARGE);
+  return premium;
+}
+
 export function calcInsurancePremium(
   carAge: number,
   drivingExperience: number,
   accidentFreeYears = 0,
 ): number {
   assertValidInputs(carAge, drivingExperience, accidentFreeYears);
-  const premium = calcBasePremium(carAge);
-  return drivingExperience < 3 ? premium * 1.25 : premium;
+  return applyExperienceSurcharge(calcBasePremium(carAge), drivingExperience);
 }
