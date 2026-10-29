@@ -15,6 +15,7 @@ function assertValidInputs(
 }
 
 function calcBasePremium(carAge: number): number {
+  if (carAge > 10) return 2000;
   if (carAge > 5) return 1500;
   return 1000;
 }
