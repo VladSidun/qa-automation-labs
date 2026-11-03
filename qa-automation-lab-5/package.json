@@ -1,0 +1,37 @@
+{
+  "name": "qa-automation-lab-5",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "start": "tsx src/server.ts",
+    "test:newman": "newman run postman/orders.postman_collection.json --reporters cli,junit,json --reporter-junit-export results/newman.xml --reporter-json-export results/newman.json"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.5",
+    "@vitest/coverage-v8": "^5.0.5",
+    "eslint": "^10.13.0",
+    "prettier": "^3.9.10",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.72.0",
+    "vitest": "^5.0.5",
+    "tsx": "^4.20.0",
+    "@types/express": "^5.0.0",
+    "supertest": "^7.1.0",
+    "@types/supertest": "^6.0.0",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "newman": "^6.2.1"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
