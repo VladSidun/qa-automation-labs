@@ -42,3 +42,14 @@
 - `Invoke-Item .\coverage\index.html` - відкрити звіт.
 - `npm run lint` - перевірка коду.
 - `npm run typecheck` - перевірка типів.
+
+## Лабораторна 5
+
+- `npm test` - прогін усіх API-тестів.
+- `npm test -- tests/sku.test.ts` - перевірки SKU, варіант 12.
+- `npm run coverage` - тести й покриття застосунку.
+- `Invoke-Item .\coverage\index.html` - відкрити покриття.
+- `npm start` - сервер для Postman на порту 3000.
+- `npm run test:newman` - колекція з 8 запитів; сервер має працювати.
+- `npm run lint` - аналіз коду.
+- `npm run typecheck` - перевірка типів.
