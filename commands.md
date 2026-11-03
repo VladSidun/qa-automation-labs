@@ -31,3 +31,14 @@
 - `npm run lint` - перевірка коду лінтером.
 - `npm run typecheck` - перевірка типів TypeScript.
 - `git log --oneline --reverse lab-2..lab-3` - історія кроків TDD.
+
+## Лабораторна 4
+
+- `npm test` - прогін усіх тестів.
+- `npm test -- tests/upload-service.test.ts` - тести сервісу завантаження.
+- `npm test -- tests/http-file-storage.test.ts` - перевірка HTTP через MSW.
+- `npm test -- tests/state-vs-interaction.test.ts` - стан і взаємодія.
+- `npm run coverage` - тести та звіт покриття.
+- `Invoke-Item .\coverage\index.html` - відкрити звіт.
+- `npm run lint` - перевірка коду.
+- `npm run typecheck` - перевірка типів.
